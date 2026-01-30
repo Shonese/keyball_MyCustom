@@ -713,13 +713,15 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         keycode &= 0xff;
     }
 
-#ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
-    // reduce auto mouse timeout if mouse key is pressed.
-    if ((is_mouse_record_kb(keycode, record) || IS_MOUSEKEY(keycode)) && record->event.pressed) {
-        set_auto_mouse_timeout(keyball_get_auto_mouse_timeout());
-        keyball.total_mouse_movement = 0;
-    }
-#endif
+    /*   マウスボタンを押した後マウスレイヤーから離脱する機能を無効化
+    #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+        // reduce auto mouse timeout if mouse key is pressed.
+        if ((is_mouse_record_kb(keycode, record) || IS_MOUSEKEY(keycode)) && record->event.pressed) {
+            set_auto_mouse_timeout(keyball_get_auto_mouse_timeout());
+            keyball.total_mouse_movement = 0;
+        }
+    #endif
+    */
 
     switch (keycode) {
 #ifndef MOUSEKEY_ENABLE
